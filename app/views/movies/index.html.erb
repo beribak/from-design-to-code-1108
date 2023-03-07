@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="h2 my-3 d-flex justify-content-center">Movies to watch 🍿</h1>
+
+      <div data-controller="search">
+        <%= form_with url: movies_path,
+        data: {search_target: "form", action: "keyup->search#typeLetter"}, 
+        method: :get, html: {class: "mb-4"} do |f| %>
+
+          <%= f.label :query, "Type a movie title" %>
+          <%= f.text_field :query,
+                           class: "form-control",
+                           value: params[:query],
+                           data: {search_target: "input"}
+                           %>
+        <% end %>
+
+        <%= render "list", movies: @movies %>
+      </div>
+    </div>
+  </div>
+</div>
